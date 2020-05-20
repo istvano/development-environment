@@ -18,6 +18,7 @@ A development environment for Java, Python, Node.js and Go built using Vagrant.
 ## Requirements
 
 * Vagrant 2.2.x
+* vagrant-hostsupdater or vagrant-hostmanager
 * Virtualbox 6.1.x
 * 4GB for the VM
 * 2 CPUs for the VM
