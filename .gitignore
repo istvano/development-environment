@@ -249,3 +249,6 @@ Customfile
 
 # Ignore IntelliJ IDEA license key
 /idea.key
+
+# Share
+/share

@@ -72,13 +72,14 @@
 # virtualbox:
 #   name: development-environment
 #   gui: true
-#   cpus: 2
+#   cpus: 4
 #   graphicscontroller: 'vboxsvga'
-#   vram: '64'
+#   vram: '128'
 #   accelerate3d: 'off'
 #   memory: '4096'
 #   clipboard: bidirectional
 #   draganddrop: bidirectional
+#   monitorcount: 1
 #   audio: dsound
 #   audiocontroller: ac97
 

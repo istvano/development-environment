@@ -104,13 +104,26 @@ Vagrant.configure(2) do |config|
       'gui' => true,
       'cpus' => 2,
       'graphicscontroller' => nil,
+      'monitorcount' => 1,
       'vram' => '64',
       'accelerate3d' => 'off',
+      'accelerate2d' => 'on',
       'memory' => '4096',
       'clipboard' => 'bidirectional',
       'draganddrop' => 'bidirectional',
       'audio' => default_vb_audio,
-      'audiocontroller' => default_vb_audiocontroler
+      'audiocontroller' => default_vb_audiocontroler,
+      'natdnsresolver' => 'on',
+      'natdnsproxy' => 'on',
+      'rtcuseutc' => 'on',
+      'hwvirtex' => 'on',
+      'nestedpaging' => 'on',
+      'vtxvpid' => 'on',
+      'largepages' => 'on',
+      'acpi' => 'on',
+	  'nictype' => 'virtio',
+      'hostname' => 'www.localhost.com',
+      'aliases' => ['localhost.com']
     },
 
     'timezone' => 'Europe/London',
@@ -152,7 +165,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  # config.vm.network 'private_network', ip: '192.168.33.10'
+  config.vm.network 'private_network', ip: '192.168.96.84'
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -164,6 +177,10 @@ Vagrant.configure(2) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder '../data', '/vagrant_data'
+  config.vm.synced_folder './share', '/home/vagrant/share'
+
+  # Post message
+  config.vm.post_up_message = "Login credentials are vagrant/vagrant"
 
   config.persistent_storage.enabled = true
   config.persistent_storage.location = config.user.persistent_storage_location
@@ -175,6 +192,23 @@ Vagrant.configure(2) do |config|
 
   # Update the VirtualBox Guest Additions
   config.vbguest.auto_update = true
+
+  # hostname management
+  config.vm.hostname = config.user.virtualbox.hostname
+  # add virtual hostname to /etc/hosts
+  if Vagrant.has_plugin?('HostsUpdater')
+    config.hostsupdater.aliases = config.user.virtualbox.aliases
+    config.hostsupdater.remove_on_suspend = true
+  elsif Vagrant.has_plugin?('HostManager')
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+    config.hostmanager.aliases = config.user.virtualbox.aliases
+  else
+    raise "Vagrantpress requires vagrant-hostsupdater or vagrant-hostmanager plugin"
+  end  
 
   config.vm.provider 'virtualbox' do |vb|
     # Give the VM a name
@@ -190,14 +224,34 @@ Vagrant.configure(2) do |config|
     unless config.user.virtualbox.graphicscontroller.nil?
       vb.customize ['modifyvm', :id, '--graphicscontroller', config.user.virtualbox.graphicscontroller]
     end
+    
+    vb.customize ['modifyvm', :id, '--monitorcount', config.user.virtualbox.monitorcount]
     vb.customize ['modifyvm', :id, '--vram', config.user.virtualbox.vram]
     vb.customize ['modifyvm', :id, '--accelerate3d', config.user.virtualbox.accelerate3d]
+    vb.customize ["modifyvm", :id, "--accelerate2dvideo",  config.user.virtualbox.accelerate2d]
+
+    # change the network card hardware for better performance
+    vb.customize ["modifyvm", :id, "--nictype1", config.user.virtualbox.nictype]
+    vb.customize ["modifyvm", :id, "--nictype2", config.user.virtualbox.nictype]
+
+    # suggested fix for slow network performance
+    # see https://github.com/mitchellh/vagrant/issues/1807
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", config.user.virtualbox.natdnsresolver]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", config.user.virtualbox.natdnsproxy]
+
+    #performance
+    vb.customize ["modifyvm", :id, "--rtcuseutc", config.user.virtualbox.rtcuseutc]
+    vb.customize ["modifyvm", :id, "--hwvirtex", config.user.virtualbox.hwvirtex]
+    vb.customize ["modifyvm", :id, "--nestedpaging", config.user.virtualbox.nestedpaging]
+    vb.customize ["modifyvm", :id, "--vtxvpid", config.user.virtualbox.vtxvpid]
+    vb.customize ["modifyvm", :id, "--largepages", config.user.virtualbox.largepages]
+    vb.customize ["modifyvm", :id, "--acpi", config.user.virtualbox.acpi]
 
     # Customize the amount of memory on the VM
     vb.memory = config.user.virtualbox.memory
 
     # Enable host desktop integration
-    vb.customize ['modifyvm', :id, '--clipboard', config.user.virtualbox.clipboard]
+    vb.customize ['modifyvm', :id, '--clipboard-mode', config.user.virtualbox.clipboard]
     vb.customize ['modifyvm', :id, '--draganddrop', config.user.virtualbox.draganddrop]
 
     unless config.user.virtualbox.audio.nil?

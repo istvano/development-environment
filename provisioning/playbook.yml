@@ -31,7 +31,7 @@
 
     # Increase minimum password strength
     - role: gantsign.pwquality
-      pwquality_minlen: 16
+      pwquality_minlen: 14
       pwquality_maxrepeat: 3
       # See https://github.com/gantsign/ansible_role_pwquality for more options
 
@@ -340,6 +340,10 @@
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
             - rebornix.Ruby
+            - mdickin.markdown-shortcuts
+            - davidanson.vscode-markdownlint
+            - vscode-icons-team.vscode-icons
+            - eamodio.gitlens
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,
@@ -347,7 +351,12 @@
               "Vagrantfile": "ruby",
               ".vagrantuser": "yaml",
               ".vagrantuser.example": "yaml"
-            }
+            },
+            "editor.fontFamily": "'Fira Code',Consolas, 'Courier New', monospace",
+            "editor.fontLigatures": true,
+            "editor.fontSize": 16,
+            "editor.fontWeight": "400",
+            "window.zoomLevel": 0.5
           }
 
     # Install Go extension for Visual Studio Code editor
@@ -437,6 +446,8 @@
               url: 'https://raw.githubusercontent.com/gantsign/inspection-profile-intellij/1.0.0/GantSign.xml'
           intellij_default_inspection_profile: GantSign
           intellij_plugins:
+            # solarized theme
+            - com.4lex4.intellij.solarized
             # Save Actions plugin
             - com.dubreuia
             # Spelling and grammar checker
@@ -564,6 +575,7 @@
             - name: common-aliases
             - name: colored-man-pages
             - name: git
+            - name: wd
             - name: httpie
             - name: sudo
             - name: bat
@@ -719,7 +731,7 @@
               version: '11'
               path: '{{ ansible_local.java.general.home }}'
           sdkman_default:
-            java: '11'
+            java: '8'
 
     - role: gantsign.sdkman_init
       tags:

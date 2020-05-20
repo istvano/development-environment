@@ -1,6 +1,16 @@
-# GantSign EnV
+# Istvan's EnV
 
-[![Build Status](https://travis-ci.org/gantsign/development-environment.svg?branch=master)](https://travis-ci.org/gantsign/development-environment)
+This environment is based on the fantastic work of gantsign development environment with few changes.
+
+Such as
+
+* multi monitor support
+* accelerate 2d settings support
+* network card performance patch
+* network performance patch
+* clipboard-mode fix
+* many more virtualbox tweaks
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/development-environment/master/LICENSE)
 
 A development environment for Java, Python, Node.js and Go built using Vagrant.
@@ -56,11 +66,6 @@ environment that you can fork to add your project specific configuration.
 * Pyenv
 * Pipenv
 
-[Learn more about the features](https://gantsign.github.io/development-environment/docs/features)
-
-## Installation
-
-[Follow the getting started guide](https://gantsign.github.io/development-environment/docs/getting-started)
 
 ## License
 
@@ -68,8 +73,8 @@ MIT
 
 ## Author Information
 
-John Freeman
+Thank you 
+(https://gantsign.github.io/development-environment/docs/requirements
 
-GantSign Ltd.
-Company No. 06109112 (registered in England)
-[![Analytics](https://ga-beacon.appspot.com/UA-83612642-2/chromeskel_a/readme?pixel)](https://github.com/igrigorik/ga-beacon)
+
+
