@@ -15,6 +15,13 @@ Such as
 
 A development environment for Java, Python, Node.js and Go built using Vagrant.
 
+## Requirements
+
+* Vagrant 2.2.x
+* Virtualbox 6.1.x
+* 4GB for the VM
+* 2 CPUs for the VM
+
 ## About
 
 Getting your development environment setup correctly can be a time consuming and
@@ -32,11 +39,6 @@ environment that you can fork to add your project specific configuration.
 ## Project News
 
 [View the latest project news](https://gantsign.github.io/development-environment/news/)
-
-## Requirements
-
-* Vagrant
-* VirtualBox
 
 [Learn more about the requirements](https://gantsign.github.io/development-environment/docs/requirements)
 

@@ -20,6 +20,28 @@
         name: zram-config
         state: absent
 
+    - name: Install some additional cli tools
+      apt:
+        pkg:
+            - mc
+            - htop
+            - p7zip
+        state: present
+      with_items:
+        - mc
+        - htop
+
+    - name: Install some additional gui packages
+      apt:
+        pkg:
+            - krusader
+            - pinta
+            - kdiff3
+            - kate
+        state: present
+      tags:
+        - gui
+
   roles:
     # Preserve the apt cache
     - role: gantsign.apt
@@ -356,7 +378,30 @@
             "editor.fontLigatures": true,
             "editor.fontSize": 16,
             "editor.fontWeight": "400",
-            "window.zoomLevel": 0.5
+            "window.zoomLevel": 0.5,
+            "workbench.colorTheme": "Solarized Light",
+            "workbench.colorCustomizations": {
+                "terminal.ansiBlack": "#000000",
+                "terminal.ansiBlue": "#0451a5",
+                "terminal.ansiBrightBlack": "#666666",
+                "terminal.ansiBrightBlue": "#0451a5",
+                "terminal.ansiBrightCyan": "#0598bc",
+                "terminal.ansiBrightGreen": "#14ce14",
+                "terminal.ansiBrightMagenta": "#bc05bc",
+                "terminal.ansiBrightRed": "#cd3131",
+                "terminal.ansiBrightWhite": "#a5a5a5",
+                "terminal.ansiBrightYellow": "#b5ba00",
+                "terminal.ansiCyan": "#0598bc",
+                "terminal.ansiGreen": "#00bc00",
+                "terminal.ansiMagenta": "#bc05bc",
+                "terminal.ansiRed": "#cd3131",
+                "terminal.ansiWhite": "#555555",
+                "terminal.ansiYellow": "#949800",
+                "terminal.border": "#80808059",
+                "terminal.foreground": "#333333",
+                "terminal.background": "#fdf6e3"
+            },
+            "explorer.confirmDelete": false
           }
 
     # Install Go extension for Visual Studio Code editor

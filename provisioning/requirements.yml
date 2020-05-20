@@ -60,7 +60,6 @@
   version: '5.4.3'
 - src: gantsign.maven-notifier
   version: '3.0.0'
-- src: gantsign.minikube
 - src: gantsign.pipenv
   version: '1.0.1'
 - src: gantsign.postman
