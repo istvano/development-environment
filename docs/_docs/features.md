@@ -623,24 +623,6 @@ Kubernetes.
 Kubernetes allows you to deploy services to a cluster of servers, to manage
 configuration, configure networking, perform rolling updates and much more.
 
-### Minikube
-
-Website: [https://github.com/kubernetes/minikube](https://github.com/kubernetes/minikube)
-
-Minikube makes it easy to run a single node Kubernetes cluster in the
-development environment.
-
-Give it a try by running the following from the terminal:
-
-```bash
-minikube start
-minikube dashboard
-```
-
-Note: because we're already running inside a VM we're running Minikube with
-`--vm-driver=none` using a Zsh
-[plugin](https://github.com/gantsign/zsh-plugins/tree/master/minikube-none).
-
 ### Helm
 
 Website: [https://helm.sh](https://helm.sh)
@@ -651,9 +633,6 @@ built for Kubernetes.
 Give it a try by running the following from the terminal:
 
 ```bash
-# Start Minikube (if you haven't already)
-minikube start
-
 # Initialize helm (if you haven't already)
 helm init
 
@@ -664,13 +643,6 @@ kubectl get pods -w --namespace kube-system
 
 # Install Apache Tomcat
 helm install stable/tomcat
-
-# helm will give the service a name <something>-tomcat
-# you can access the tomcat by running:
-http "$(minikube service --url <something>-tomcat)"
-# You'll get a HTTP 404 response (we haven't provided a
-# webarchive), but you'll see it's come from a
-# `Apache-Coyote` server.
 ```
 
 ### Kompose
@@ -682,9 +654,6 @@ Kompose is a conversion tool to go from Docker Compose to Kubernetes.
 Give it a try by running the following from the terminal:
 
 ```bash
-# Start Minikube (if you haven't already)
-minikube start
-
 # cd into a docker-compose project
 # or use wget to download the following example compose file
 wget https://raw.githubusercontent.com/kubernetes/kompose/master/examples/docker-compose-v3.yaml \
@@ -699,10 +668,6 @@ kubectl get pods -w
 
 # Once you're done shutdown the services
 kompose down
-
-# Once you're done with the Minikube instance
-minikube stop
-minikube delete
 ```
 
 ### kops

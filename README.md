@@ -51,8 +51,6 @@ environment that you can fork to add your project specific configuration.
 * Terminator
 * Oh My Zsh
 * Docker
-* Kubernetes
-* Minikube
 * Helm
 * kops
 * Visual Studio Code

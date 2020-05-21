@@ -208,19 +208,6 @@
       tags:
         - docker
 
-    # Install Kubernetes
-    - role: gantsign.kubernetes
-      tags:
-        - kubernetes
-        - docker
-      kubernetes_node_type: admin
-
-    # Install Minikube
-    - role: gantsign.minikube
-      tags:
-        - kubernetes
-        - docker
-
     # Install Helm
     - role: gantsign.helm
       tags:
@@ -414,6 +401,7 @@
         - username: vagrant
           visual_studio_code_extensions:
             - ms-vscode.Go
+            - ms-azuretools.vscode-docker
 
     # Install Python extension for Visual Studio Code editor
     - role: gantsign.visual-studio-code-extensions
@@ -682,9 +670,6 @@
             - name: kubeadm
               url: gantsign/zsh-plugins
               location: kubeadm
-            - name: minikube-none
-              url: gantsign/zsh-plugins
-              location: minikube-none
             - name: helm
             - name: kompose
               url: gantsign/zsh-plugins
