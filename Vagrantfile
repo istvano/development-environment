@@ -123,7 +123,8 @@ Vagrant.configure(2) do |config|
       'acpi' => 'on',
 	  'nictype' => 'virtio',
       'hostname' => 'www.localhost.com',
-      'aliases' => ['localhost.com']
+      'aliases' => ['localhost.com'],
+      'timesync-set-threshold' => nil
     },
 
     'timezone' => 'Europe/London',
@@ -225,6 +226,9 @@ Vagrant.configure(2) do |config|
       vb.customize ['modifyvm', :id, '--graphicscontroller', config.user.virtualbox.graphicscontroller]
     end
     
+	unless config.user.virtualbox.timesync-set-threshold.nil?
+		vb.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 10000 ]
+	end
     vb.customize ['modifyvm', :id, '--monitorcount', config.user.virtualbox.monitorcount]
     vb.customize ['modifyvm', :id, '--vram', config.user.virtualbox.vram]
     vb.customize ['modifyvm', :id, '--accelerate3d', config.user.virtualbox.accelerate3d]
@@ -341,6 +345,9 @@ Vagrant.configure(2) do |config|
   && grep -q -F "${persistent_mount}" /etc/fstab || echo "${persistent_mount}" >> /etc/fstab \
   && mount /usr/local/src/ansible/data
 SCRIPT
+
+  #enable time sync
+  node.vm.provision :shell, :inline => "timedatectl set-ntp on", privileged: true, run: "always"
 
   # Perform preliminary setup before the main Ansible provisioning
   config.vm.provision 'ansible_local' do |ansible|
