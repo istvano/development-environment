@@ -124,7 +124,7 @@ Vagrant.configure(2) do |config|
 	  'nictype' => 'virtio',
       'hostname' => 'www.localhost.com',
       'aliases' => ['localhost.com'],
-      'timesync' => nil
+	  'ip' => '192.168.96.48'
     },
 
     'timezone' => 'Europe/London',
@@ -166,7 +166,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network 'private_network', ip: '192.168.96.84'
+  config.vm.network 'private_network', ip: config.user.virtualbox.ip
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -226,10 +226,6 @@ Vagrant.configure(2) do |config|
       vb.customize ['modifyvm', :id, '--graphicscontroller', config.user.virtualbox.graphicscontroller]
     end
     
-    unless config.user.virtualbox.timesync.nil?
-      vb.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 10000 ]
-    end
-
     vb.customize ['modifyvm', :id, '--monitorcount', config.user.virtualbox.monitorcount]
     vb.customize ['modifyvm', :id, '--vram', config.user.virtualbox.vram]
     vb.customize ['modifyvm', :id, '--accelerate3d', config.user.virtualbox.accelerate3d]
@@ -346,9 +342,6 @@ Vagrant.configure(2) do |config|
   && grep -q -F "${persistent_mount}" /etc/fstab || echo "${persistent_mount}" >> /etc/fstab \
   && mount /usr/local/src/ansible/data
 SCRIPT
-
-  #enable time sync
-  config.vm.provision :shell, :inline => "timedatectl set-ntp on", privileged: true, run: "always"
 
   # Perform preliminary setup before the main Ansible provisioning
   config.vm.provision 'ansible_local' do |ansible|
