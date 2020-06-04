@@ -86,3 +86,5 @@
   name: gantsign.xdesktop
 - src: gantsign.zswap
   version: '1.0.0'
+- src: pogosoftware.self_signed_cert
+  version: 'v1.0.0' 

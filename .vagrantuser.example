@@ -76,7 +76,7 @@
 #   graphicscontroller: 'vboxsvga'
 #   vram: '128'
 #   accelerate3d: 'off'
-#   memory: '4096'
+#   memory: '8192'
 #   clipboard: bidirectional
 #   draganddrop: bidirectional
 #   monitorcount: 1

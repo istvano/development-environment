@@ -6,6 +6,88 @@
     x_ansible_download_dir: /usr/local/src/ansible/data
     intellij_edition: community
 
+    self_signed_cert_cfssl_url: https://github.com/cloudflare/cfssl/releases/download/v1.4.1/cfssl_1.4.1_linux_amd64
+    self_signed_cert_cfssl_json_url: https://github.com/cloudflare/cfssl/releases/download/v1.4.1/cfssljson_1.4.1_linux_amd64
+
+    self_signed_cert_dir: /etc/certs/
+
+    self_signed_cert_profiles:
+      - name: server
+        expirity: 8760h
+        usages:
+          - signing
+          - key encipherment
+          - server auth
+          - client auth
+      - name: client
+        expirity: 8760h
+        usages:
+          - signing
+          - key encipherment
+          - client auth
+
+    self_signed_cert_ca_certs:
+      - name: localhost-ca
+        cn: localhost.com
+        key_algo: rsa
+        key_size: 2048
+        country: EU
+        location: Internet
+        organisation: Development
+        organisation_unit: IT
+        state: internet
+        trust_ca_cert: false
+
+    self_signed_cert_certs:
+      - name: server
+        profile: server
+        ca_name: localhost-ca
+        export_to_pfx: true
+        cn: localhost.com
+        hosts:
+          - localhost.com
+          - www.localhost.com
+          - admin.localhost.com
+          - dashboard.localhost.com
+          - api.localhost.com
+          - db.localhost.com
+          - ldap.localhost.com
+          - search.localhost.com
+          - login.localhost.com
+          - keycloak.localhost.com
+          - wildfly.localhost.com
+        key_algo: rsa
+        key_size: 2048
+        country: EU
+        location: Internet
+        organisation: Development
+        organisation_unit: IT
+        state: internet
+      - name: client
+        profile: client
+        ca_name: localhost-ca
+        export_to_pfx: true
+        cn: localhost.com
+        hosts:
+          - localhost.com
+          - www.localhost.com
+          - admin.localhost.com
+          - dashboard.localhost.com
+          - api.localhost.com
+          - db.localhost.com
+          - ldap.localhost.com
+          - search.localhost.com
+          - login.localhost.com
+          - keycloak.localhost.com
+          - wildfly.localhost.com
+        key_algo: rsa
+        key_size: 2048
+        country: EU
+        location: Internet
+        organisation: Development
+        organisation_unit: IT
+        state: internet
+
   pre_tasks:
     - name: update apt cache
       apt: update_cache=yes cache_valid_time=86400
@@ -776,3 +858,6 @@
               path: '{{ ansible_local.maven.general.home }}'
           sdkman_default:
             maven: '3.6'
+    - role: pogosoftware.self_signed_cert
+      tags:
+        - selfsignedcert

@@ -123,7 +123,7 @@ Vagrant.configure(2) do |config|
       'acpi' => 'on',
 	  'nictype' => 'virtio',
       'hostname' => 'www.localhost.com',
-      'aliases' => ['localhost.com'],
+      'aliases' => ['localhost.com', 'admin.localhost.com', 'dashboard.localhost.com', 'api.localhost.com', 'db.localhost.com', 'ldap.localhost.com','search.localhost.com', 'login.localhost.com','keycloak.localhost.com','wildfly.localhost.com'],
 	  'ip' => '192.168.96.48'
     },
 
