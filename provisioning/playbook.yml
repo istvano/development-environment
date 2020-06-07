@@ -108,6 +108,7 @@
             - mc
             - htop
             - p7zip
+            - libnss3-tools
         state: present
       with_items:
         - mc
@@ -858,6 +859,29 @@
               path: '{{ ansible_local.maven.general.home }}'
           sdkman_default:
             maven: '3.6'
+
     - role: pogosoftware.self_signed_cert
       tags:
         - selfsignedcert
+
+    - role: istvano.microk8s
+      tags:
+        - kubernetes
+      users:
+        - vagrant
+
+    - role: istvano.k9s
+      tags:
+        - kubernetes
+
+    - role: istvano.kail
+      tags:
+        - kubernetes
+
+    - role: istvano.kubectx
+      tags:
+        - kubernetes
+
+    - role: istvano.kustomize
+      tags:
+        - kubernetes

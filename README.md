@@ -23,6 +23,38 @@ A development environment for Java, Python, Node.js and Go built using Vagrant.
 * 4GB for the VM
 * 2 CPUs for the VM
 
+## Useful infos
+
+### Kubernetes Dashboard 
+
+Kubernetes [Dashboard](https://dashboard.localhost.com/) is available. You can generate a token 
+with 
+
+```bash 
+microk8s kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
+```
+
+### Date Sync issues
+
+```bash
+sudo timedatectl set-ntp off && sudo timedatectl set-ntp on
+```
+
+### To make Chrome to trust the self sign certificate that was generated at build time add localhost.com cert using libnss3-tools
+
+```bash 
+[ -d ~/.pki/nssdb ] || mkdir -p ~/.pki/nssdb
+certutil -d sql:$HOME/.pki/nssdb -A -n 'localhost.com cert authority' -i /etc/certs/localhost-ca.pem -t TCP,TCP,TCP
+```
+
+### If kubectl or kubeadm autocompletition does not work. They can be added manually 
+To manually configure Zsh tab completion add the following to your .zshrc:
+
+```bash
+eval "$(kubectl completion zsh)"
+eval "$(kubeadm completion zsh)"
+```
+
 ## About
 
 Getting your development environment setup correctly can be a time consuming and

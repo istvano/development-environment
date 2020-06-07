@@ -88,3 +88,13 @@
   version: '1.0.0'
 - src: pogosoftware.self_signed_cert
   version: 'v1.0.0' 
+- src: istvano.microk8s
+  version: '1.0.0'
+- src: istvano.k9s
+  version: '1.0.0'
+- src: istvano.kail
+  version: '1.0.0'
+- src: istvano.kubectx
+  version: '1.0.0'
+- src: istvano.kustomize
+  version: '1.0.0'
