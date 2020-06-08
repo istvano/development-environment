@@ -19,6 +19,16 @@ end
 
 vagrant_dir = __dir__
 
+def virtualbox_version()
+    vboxmanage = Vagrant::Util::Which.which("VBoxManage") || Vagrant::Util::Which.which("VBoxManage.exe")
+    if vboxmanage != nil
+        s = Vagrant::Util::Subprocess.execute(vboxmanage, '--version')
+        return s.stdout.strip!
+    else
+        return nil
+    end
+end
+
 # All Vagrant configuration is done below. The '2' in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -192,7 +202,11 @@ Vagrant.configure(2) do |config|
   config.persistent_storage.volgroupname = 'persist-vg'
 
   # Update the VirtualBox Guest Additions
-  config.vbguest.auto_update = true
+  if Vagrant.has_plugin?('vagrant-vbguest')
+	config.vbguest.auto_update = true
+	config.vbguest.allow_downgrade = true
+  # config.vbguest.auto_reboot = false
+  end
 
   # hostname management
   config.vm.hostname = config.user.virtualbox.hostname
@@ -209,7 +223,7 @@ Vagrant.configure(2) do |config|
     config.hostmanager.aliases = config.user.virtualbox.aliases
   else
     raise "Vagrantpress requires vagrant-hostsupdater or vagrant-hostmanager plugin"
-  end  
+  end
 
   config.vm.provider 'virtualbox' do |vb|
     # Give the VM a name
@@ -252,8 +266,15 @@ Vagrant.configure(2) do |config|
     vb.memory = config.user.virtualbox.memory
 
     # Enable host desktop integration
-    vb.customize ['modifyvm', :id, '--clipboard-mode', config.user.virtualbox.clipboard]
-    vb.customize ['modifyvm', :id, '--draganddrop', config.user.virtualbox.draganddrop]
+	vb_ver = virtualbox_version()
+
+	if (vb_ver =~ /6.0.(.*)/)
+		vb.customize ['modifyvm', :id, '--clipboard', config.user.virtualbox.clipboard]
+	else
+		vb.customize ['modifyvm', :id, '--clipboard-mode', config.user.virtualbox.clipboard]
+	end
+
+	vb.customize ['modifyvm', :id, '--draganddrop', config.user.virtualbox.draganddrop]
 
     unless config.user.virtualbox.audio.nil?
       # Enable sound
