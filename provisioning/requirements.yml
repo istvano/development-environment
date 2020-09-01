@@ -34,7 +34,7 @@
 - src: gantsign.gnome-proxy
   version: '1.2.0'
 - src: gantsign.golang
-  version: '2.3.2'
+  version: '2.4.2'
 - src: gantsign.helm
 - src: gantsign.hub
 - src: gantsign.inotify
@@ -45,7 +45,7 @@
 - src: gantsign.intellij-plugins
   version: '3.0.0'
 - src: gantsign.java
-  version: '8.2.1'
+  version: '9.0.1'
 - src: gantsign.keyboard
   version: '1.4.0'
 - src: gantsign.kompose
@@ -69,7 +69,7 @@
 - src: gantsign.pyenv
   version: '1.0.0'
 - src: gantsign.sdkman
-  version: '1.1.2'
+  version: '1.2.0'
 - src: gantsign.sdkman_init
   version: '1.2.1'
 - src: gantsign.swapspace

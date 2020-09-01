@@ -327,7 +327,7 @@
     - role: gantsign.java
       tags:
         - java
-      java_version: jdk8u252-b09
+      java_version: '8.0.262+10'
       java_is_default_installation: no
       java_fact_group_name: java_8
 
@@ -335,7 +335,7 @@
     - role: gantsign.java
       tags:
         - java
-      java_version: 'jdk-11.0.7+10'
+      java_version: '11.0.8+10'
 
     # Install Maven
     - role: gantsign.maven
@@ -483,8 +483,7 @@
       users:
         - username: vagrant
           visual_studio_code_extensions:
-            - golang.Go
-            - ms-azuretools.vscode-docker
+            - ms-vscode.Go
 
     # Install Python extension for Visual Studio Code editor
     - role: gantsign.visual-studio-code-extensions

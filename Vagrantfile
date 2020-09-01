@@ -376,7 +376,8 @@ SCRIPT
     ansible.galaxy_role_file = 'provisioning/requirements.yml'
 
     # Use alt-galaxy to download roles instead of ansible-galaxy.
-    ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force'
+    # Workaround for: "[ERROR]: failed to download the file: [Errno 104] Connection reset by peer"
+    ansible.galaxy_command = 'alt-galaxy install --role-file=%{role_file} --roles-path=%{roles_path} --force'
 
     ansible.extra_vars = {
       timezone: config.user.timezone,
