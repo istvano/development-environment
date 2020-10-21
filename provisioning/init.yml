@@ -92,3 +92,10 @@
         or (chrome_repo is defined and chrome_repo.changed)
         or (vscode_repo is defined and vscode_repo.changed)
         or (lazygit_repo is defined and lazygit_repo.changed)
+
+# kills multi monitor support
+#    - name: ensure kernel headers are present
+#      apt:
+#        name: "linux-headers-{{ ansible_kernel }}"
+#        state: present
+#      become: true

@@ -133,7 +133,7 @@ Vagrant.configure(2) do |config|
       'acpi' => 'on',
 	  'nictype' => 'virtio',
       'hostname' => 'www.localhost.com',
-      'aliases' => ['localhost.com', 'admin.localhost.com', 'dashboard.localhost.com', 'api.localhost.com', 'db.localhost.com', 'ldap.localhost.com','search.localhost.com', 'login.localhost.com'],
+      'aliases' => ['localhost.com', 'admin.localhost.com', 'dashboard.localhost.com', 'api.localhost.com', 'db.localhost.com', 'ldap.localhost.com','search.localhost.com', 'login.localhost.com', 'smtp.localhost.com', 'static.localhost.com', 'spa.localhost.com', 'app.localhost.com', 'secure.localhost.com', 'elevated.localhost.com', 'doc.localhost.com', 'pwa.localhost.com', 'queue.localhost.com', 'live.localhost.com', 'stream.localhost.com', 'service.localhost.com', 'storage.localhost.com', 'worker.localhost.com', 'vault.localhost.com', 'cert.localhost.com', 'security.localhost.com', 'asset.localhost.com', 'forum.localhost.com', 'files.localhost.com', 'group.localhost.com', 'geo.localhost.com', 'route.localhost.com'],
 	  'ip' => '192.168.96.48'
     },
 

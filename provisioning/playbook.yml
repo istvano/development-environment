@@ -435,6 +435,7 @@
             - mdickin.markdown-shortcuts
             - davidanson.vscode-markdownlint
             - vscode-icons-team.vscode-icons
+            - ms-vscode-remote.remote-containers
             - eamodio.gitlens
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
