@@ -47,15 +47,13 @@
         hosts:
           - localhost.com
           - www.localhost.com
-          - admin.localhost.com
-          - dashboard.localhost.com
-          - api.localhost.com
-          - db.localhost.com
-          - ldap.localhost.com
-          - search.localhost.com
-          - login.localhost.com
-          - keycloak.localhost.com
-          - wildfly.localhost.com
+          - localhost.corp
+          - localhost.test
+          - localhost.local
+          - localhost.lan
+          - localhost.home
+          - project.local
+          - project.localhost
         key_algo: rsa
         key_size: 2048
         country: EU
@@ -71,15 +69,13 @@
         hosts:
           - localhost.com
           - www.localhost.com
-          - admin.localhost.com
-          - dashboard.localhost.com
-          - api.localhost.com
-          - db.localhost.com
-          - ldap.localhost.com
-          - search.localhost.com
-          - login.localhost.com
-          - keycloak.localhost.com
-          - wildfly.localhost.com
+          - localhost.corp
+          - localhost.test
+          - localhost.local
+          - localhost.lan
+          - localhost.home
+          - project.local
+          - project.localhost
         key_algo: rsa
         key_size: 2048
         country: EU
@@ -874,6 +870,8 @@
     - role: istvano.k9s
       tags:
         - kubernetes
+      k9s_version: '0.22.1'
+      k9s_redistribution_sha256sum: '42d8aef6b839a9bc60de29d2461521596ce2d1f66347dbf5196983229cfeafd2'
 
     - role: istvano.kail
       tags:
@@ -886,3 +884,6 @@
     - role: istvano.kustomize
       tags:
         - kubernetes
+      kustomize_version: '3.8.5'
+      kustomize_redistribution_sha256sum: '7ff6218fdbf7ad5d90805ff9091f256ba6868e3116c2c05d3e50fe0a0595f50f'
+
