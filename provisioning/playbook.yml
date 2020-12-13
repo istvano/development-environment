@@ -433,6 +433,7 @@
             - vscode-icons-team.vscode-icons
             - ms-vscode-remote.remote-containers
             - eamodio.gitlens
+            - ms-cst-e.vscode-devskim
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,
