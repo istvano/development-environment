@@ -141,7 +141,7 @@ Vagrant.configure(2) do |config|
 					'queue.localhost.com', 'live.localhost.com', 'stream.localhost.com', 'service.localhost.com',
 					'storage.localhost.com', 'worker.localhost.com', 'vault.localhost.com', 'cert.localhost.com',
 					'security.localhost.com', 'asset.localhost.com', 'forum.localhost.com', 'files.localhost.com',
- 					'group.localhost.com', 'geo.localhost.com', 'route.localhost.com',
+ 					'group.localhost.com', 'geo.localhost.com', 'route.localhost.com', 'indexer.localhost.com',
           'www.localhost.corp', 'admin.localhost.corp', 'dashboard.localhost.corp', 'api.localhost.corp',
 					'db.localhost.corp', 'ldap.localhost.corp','search.localhost.corp', 'login.localhost.corp',
 					'smtp.localhost.corp', 'static.localhost.corp', 'spa.localhost.corp', 'app.localhost.corp',
@@ -149,7 +149,7 @@ Vagrant.configure(2) do |config|
 					'queue.localhost.corp', 'live.localhost.corp', 'stream.localhost.corp', 'service.localhost.corp',
 					'storage.localhost.corp', 'worker.localhost.corp', 'vault.localhost.corp', 'cert.localhost.corp',
 					'security.localhost.corp', 'asset.localhost.corp', 'forum.localhost.corp', 'files.localhost.corp',
-					'group.localhost.corp', 'geo.localhost.corp', 'route.localhost.corp',
+					'group.localhost.corp', 'geo.localhost.corp', 'route.localhost.corp', 'indexer.localhost.corp',
           'www.localhost.lan', 'admin.localhost.lan', 'dashboard.localhost.lan', 'api.localhost.lan',
 					'db.localhost.lan', 'ldap.localhost.lan','search.localhost.lan', 'login.localhost.lan',
 					'smtp.localhost.lan', 'static.localhost.lan', 'spa.localhost.lan', 'app.localhost.lan',
@@ -157,7 +157,7 @@ Vagrant.configure(2) do |config|
 					'queue.localhost.lan', 'live.localhost.lan', 'stream.localhost.lan', 'service.localhost.lan',
 					'storage.localhost.lan', 'worker.localhost.lan', 'vault.localhost.lan', 'cert.localhost.lan',
 					'security.localhost.lan', 'asset.localhost.lan', 'forum.localhost.lan', 'files.localhost.lan',
-					'group.localhost.lan', 'geo.localhost.lan', 'route.localhost.lan'
+					'group.localhost.lan', 'geo.localhost.lan', 'route.localhost.lan', 'indexer.localhost.lan'
           ],
 	  'ip' => '192.168.96.48'
     },
