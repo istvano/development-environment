@@ -878,6 +878,6 @@
     - role: istvano.kustomize
       tags:
         - kubernetes
-      kustomize_version: '3.9.2'
-      kustomize_redistribution_sha256sum: 'f5c76a726cbd27b74587fcd2816e86b3f6279d84043b7ed3725bf48b1bc8ca4a'
+      kustomize_version: '3.8.5'
+      kustomize_redistribution_sha256sum: '7ff6218fdbf7ad5d90805ff9091f256ba6868e3116c2c05d3e50fe0a0595f50f'
 
