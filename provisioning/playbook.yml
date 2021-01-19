@@ -299,12 +299,6 @@
         - kubernetes
         - docker
 
-    # Install kops
-    - role: gantsign.kops
-      tags:
-        - kubernetes
-        - docker
-
     # Install Pyenv
     - role: gantsign.pyenv
       tags:
@@ -331,7 +325,7 @@
     - role: gantsign.java
       tags:
         - java
-      java_version: '11.0.8+10'
+      java_version: '11.0.9.1+1'
 
     # Install Maven
     - role: gantsign.maven
@@ -755,7 +749,6 @@
             - name: kompose
               url: gantsign/zsh-plugins
               location: kompose
-            - name: kops
 
     - role: gantsign.antigen_bundles
       tags:
@@ -871,8 +864,8 @@
     - role: istvano.k9s
       tags:
         - kubernetes
-      k9s_version: '0.22.1'
-      k9s_redistribution_sha256sum: '42d8aef6b839a9bc60de29d2461521596ce2d1f66347dbf5196983229cfeafd2'
+      k9s_version: '0.24.2'
+      k9s_redistribution_sha256sum: '238b754da8469c1e25a2699d2994a59b16308b2abee671cbf9c476a0b8d9bd67'
 
     - role: istvano.kail
       tags:
@@ -885,6 +878,6 @@
     - role: istvano.kustomize
       tags:
         - kubernetes
-      kustomize_version: '3.8.5'
-      kustomize_redistribution_sha256sum: '7ff6218fdbf7ad5d90805ff9091f256ba6868e3116c2c05d3e50fe0a0595f50f'
+      kustomize_version: '3.9.2'
+      kustomize_redistribution_sha256sum: 'f5c76a726cbd27b74587fcd2816e86b3f6279d84043b7ed3725bf48b1bc8ca4a'
 
