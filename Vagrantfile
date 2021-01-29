@@ -6,7 +6,10 @@
 # We need Vagrant >= 2.1.0 becuse we use triggers
 Vagrant.require_version '>= 2.1.0'
 
-required_plugins = %w[vagrant-reload vagrant-persistent-storage vagrant-vbguest vagrant-proxyconf nugrant]
+# Enable vagrant disks experimental feature
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
+required_plugins = %w[vagrant-reload vagrant-persistent-storage vagrant-vbguest vagrant-proxyconf nugrant vagrant-disksize]
 plugins_to_install = required_plugins.reject { |plugin| Vagrant.has_plugin? plugin }
 unless plugins_to_install.empty?
   puts "Installing plugins: #{plugins_to_install.join(' ')}"
@@ -113,6 +116,7 @@ Vagrant.configure(2) do |config|
       'name' => 'development-environment',
       'gui' => true,
       'cpus' => 2,
+      'cpucap' => '90',
       'graphicscontroller' => nil,
       'monitorcount' => 1,
       'vram' => '64',
@@ -131,35 +135,10 @@ Vagrant.configure(2) do |config|
       'vtxvpid' => 'on',
       'largepages' => 'on',
       'acpi' => 'on',
-	  'nictype' => 'virtio',
+      'nictype' => 'virtio',
       'hostname' => 'localhost.com',
-      'aliases' => ['localhost.corp', 'localhost.test','localhost.local','localhost.lan','localhost.home','project.local','project.localhost',
-          'www.localhost.com', 'admin.localhost.com', 'dashboard.localhost.com', 'api.localhost.com',
-					'db.localhost.com', 'ldap.localhost.com','search.localhost.com', 'login.localhost.com',
-					'smtp.localhost.com', 'static.localhost.com', 'spa.localhost.com', 'app.localhost.com',
-					'secure.localhost.com', 'elevated.localhost.com', 'doc.localhost.com', 'pwa.localhost.com',
-					'queue.localhost.com', 'live.localhost.com', 'stream.localhost.com', 'service.localhost.com',
-					'storage.localhost.com', 'worker.localhost.com', 'vault.localhost.com', 'cert.localhost.com',
-					'security.localhost.com', 'asset.localhost.com', 'forum.localhost.com', 'files.localhost.com',
- 					'group.localhost.com', 'geo.localhost.com', 'route.localhost.com', 'indexer.localhost.com',
-          'www.localhost.corp', 'admin.localhost.corp', 'dashboard.localhost.corp', 'api.localhost.corp',
-					'db.localhost.corp', 'ldap.localhost.corp','search.localhost.corp', 'login.localhost.corp',
-					'smtp.localhost.corp', 'static.localhost.corp', 'spa.localhost.corp', 'app.localhost.corp',
-					'secure.localhost.corp', 'elevated.localhost.corp', 'doc.localhost.corp', 'pwa.localhost.corp',
-					'queue.localhost.corp', 'live.localhost.corp', 'stream.localhost.corp', 'service.localhost.corp',
-					'storage.localhost.corp', 'worker.localhost.corp', 'vault.localhost.corp', 'cert.localhost.corp',
-					'security.localhost.corp', 'asset.localhost.corp', 'forum.localhost.corp', 'files.localhost.corp',
-					'group.localhost.corp', 'geo.localhost.corp', 'route.localhost.corp', 'indexer.localhost.corp',
-          'www.localhost.lan', 'admin.localhost.lan', 'dashboard.localhost.lan', 'api.localhost.lan',
-					'db.localhost.lan', 'ldap.localhost.lan','search.localhost.lan', 'login.localhost.lan',
-					'smtp.localhost.lan', 'static.localhost.lan', 'spa.localhost.lan', 'app.localhost.lan',
-					'secure.localhost.lan', 'elevated.localhost.lan', 'doc.localhost.lan', 'pwa.localhost.lan',
-					'queue.localhost.lan', 'live.localhost.lan', 'stream.localhost.lan', 'service.localhost.lan',
-					'storage.localhost.lan', 'worker.localhost.lan', 'vault.localhost.lan', 'cert.localhost.lan',
-					'security.localhost.lan', 'asset.localhost.lan', 'forum.localhost.lan', 'files.localhost.lan',
-					'group.localhost.lan', 'geo.localhost.lan', 'route.localhost.lan', 'indexer.localhost.lan'
-          ],
-	  'ip' => '192.168.96.48'
+      'aliases' => ['localhost.corp', 'localhost.test','localhost.local','localhost.lan','localhost.home'],
+	    'ip' => '192.168.96.48'
     },
 
     'timezone' => 'Europe/London',
@@ -191,8 +170,13 @@ Vagrant.configure(2) do |config|
       'license_key_path' => nil
     },
 
-    'persistent_storage_location' => '.vagrant/persistent-disk.vdi'
+    'persistent_storage_location' => '.vagrant/persistent-disk.vdi',
+    'persistent_storage_size' => 16_000,
+    'disk_size' => '96GB'
   }
+
+  # Increase the default disk size of the bento image (64GB) to 96GB
+  config.disksize.size = config.user.disk_size
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -220,7 +204,7 @@ Vagrant.configure(2) do |config|
 
   config.persistent_storage.enabled = true
   config.persistent_storage.location = config.user.persistent_storage_location
-  config.persistent_storage.size = 16_000
+  config.persistent_storage.size = config.user.persistent_storage_size
   config.persistent_storage.mountname = 'persistent'
   config.persistent_storage.filesystem = 'ext4'
   config.persistent_storage.mountpoint = '/var/persistent'
@@ -269,6 +253,7 @@ Vagrant.configure(2) do |config|
     vb.customize ['modifyvm', :id, '--vram', config.user.virtualbox.vram]
     vb.customize ['modifyvm', :id, '--accelerate3d', config.user.virtualbox.accelerate3d]
     vb.customize ["modifyvm", :id, "--accelerate2dvideo",  config.user.virtualbox.accelerate2d]
+    vb.customize ['modifyvm', :id, '--cpuexecutioncap', config.user.virtualbox.cpucap]
 
     # change the network card hardware for better performance
     vb.customize ["modifyvm", :id, "--nictype1", config.user.virtualbox.nictype]
