@@ -176,6 +176,7 @@ Vagrant.configure(2) do |config|
   }
 
   # Increase the default disk size of the bento image (64GB) to 96GB
+  puts "Setting primary disk size to: #{config.user.disk_size}"
   config.disksize.size = config.user.disk_size
 
   # Create a forwarded port mapping which allows access to a specific port

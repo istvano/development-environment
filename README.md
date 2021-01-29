@@ -99,6 +99,22 @@ environment that you can fork to add your project specific configuration.
 * Pyenv
 * Pipenv
 
+## Lvm partition resizing
+
+* resize partition
+`sudo cfdisk /dev/sda`
+
+* show volume names
+`sudo lvdisplay`
+
+* display sizes
+`sudo vgdisplay`
+
+* extend lvm root partition to maximum
+`sudo lvextend -l +100%FREE /dev/vagrant-vg/root`
+
+*  resize filesystem to max
+`sudo resize2fs /dev/vagrant-vg/root`
 
 ## License
 
